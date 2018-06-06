@@ -27,7 +27,7 @@ public class ValidTest {
     @Test
     public void validLoginTest(){
         loginPage.openPage("http://v3.test.itpmgroup.com/login");
-        loginPage.loginUser("student", "90");
+        loginPage.loginUser("student", "909090");
     }
 
     @After
