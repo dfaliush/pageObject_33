@@ -3,6 +3,7 @@ package libs;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class UIActions {
     Logger log;
@@ -62,5 +63,23 @@ public class UIActions {
             driver.findElement(element).click();
         }
 
+    }
+
+    public void selectDropDownElemByValue(WebElement webElement, String value){
+        webElement.findElement(By.xpath(".//option[contains(text(),'" + value + "')]")).click();
+    }
+
+    public boolean isVisibleAbdEnabled(WebElement element){
+        try {
+
+            if (element.isDisplayed() && element.isEnabled()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            log.error("Something went wrong");
+            throw new AssertionError("isVisibleAbdEnabled: Ooops!");
+        }
     }
 }
