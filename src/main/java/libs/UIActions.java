@@ -1,17 +1,17 @@
 package libs;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 public class UIActions {
     Logger log;
     WebDriver driver;
+    JavascriptExecutor jse;
 
     public UIActions(WebDriver driver){
         this.driver = driver;
         log = Logger.getLogger(getClass());
+        jse = (JavascriptExecutor)driver;
     }
 
     /**
@@ -80,6 +80,54 @@ public class UIActions {
         } catch (Exception e) {
             log.error("Something went wrong");
             throw new AssertionError("isVisibleAbdEnabled: Ooops!");
+        }
+    }
+
+    public String getTextFromElement(By element){
+        try {
+            return driver.findElement(element).getText();
+        } catch (Exception e) {
+            log.error("Something went wrong");
+            throw new AssertionError("getTextFromElement: Ooops!");
+        }
+    }
+
+    public void scrollDownInPixels(int pixels){
+
+        try {
+            jse.executeScript("scroll(0,"+ pixels +  ") ;");
+        } catch (Exception e) {
+            log.error("JavascriptExecutor is broken");
+            throw new AssertionError("scrollDownInPixels: Ooops!");
+        }
+    }
+
+    public void scrollUpInPixels(int pixels){
+        try {
+            jse.executeScript("scroll(0,-"+ pixels +  ") ;");
+        } catch (Exception e) {
+            log.error("JavascriptExecutor is broken");
+            throw new AssertionError("scrollUpInPixels: Ooops!");
+        }
+    }
+
+
+    public void scrollHorizontal(WebElement element){
+        try {
+            jse.executeScript("arguments[0].scrollIntoView();",element );
+
+        } catch (Exception e) {
+            log.error("JavascriptExecutor is broken");
+            throw new AssertionError("scrollHorizontal: Ooops!");
+        }
+    }
+
+    public String getCurrentUrl(){
+        try {
+            return driver.getCurrentUrl();
+        } catch (Exception e) {
+            log.error("Can't get current url");
+            throw new AssertionError("getCurrentUrl: Ooops!");
         }
     }
 }

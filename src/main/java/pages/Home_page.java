@@ -15,12 +15,12 @@ public class Home_page extends ParentPage {
     By sideBarDictionarySpares= By.xpath(".//*[@id='spares']/a");
     By sideBarDictionaryCustomers= By.xpath(".//*[@id='prov_cus']/a");
     By sideBarDictionaryDealsType= By.xpath(".//*[@id='deal_type']/a");
-    By sideBarDictionaryServiceApparat= By.xpath(".//*[@id='service_apparat']//" +
+    By sideBarServiceApparat= By.xpath(".//*[@id='service_apparat']//" +
             "span[text()='Обслуживание']");
 
-    By sideBarDictionaryInstall= By.xpath(".//*[@id='installation']//span[text()='Установка']");
-    By sideBarDictionaryDeals= By.xpath(".//*[@id='deal']//span[text()='Сделки']");
-    By sideBarDictionaryReport= By.xpath(".//*[@id='report']//span[text()='Отчет']");
+    By sideBarInstall= By.xpath(".//*[@id='installation']//span[text()='Установка']");
+    By sideBarDeals= By.xpath(".//*[@id='deal']//span[text()='Сделки']");
+    By sideBarReport= By.xpath(".//*[@id='report']//span[text()='Отчет']");
     By homeButton= By.xpath(".//*[@href='/']");
     By tableBase= By.xpath(".//div[@class='col-md-12']");
     By addRow= By.xpath(".//a[@data-original-title='Add']");
