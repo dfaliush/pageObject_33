@@ -31,9 +31,11 @@ public class UIActions {
      * Method which click to element
      * @param element
      */
-    public void clickToElement(By element){
+    public void clickToElement(WebElement element){
         try {
-            driver.findElement(element).click();
+
+            // Refactoring. driver.findElement(element).click();
+            element.click();
             log.info(element + ": clicked " );
         } catch (Exception ex) {
             log.error("Can't click to an element " + element);
@@ -45,22 +47,22 @@ public class UIActions {
      * @param element
      * @param value
      */
-    public void inputToTextField(By element, String value){
+    public void inputToTextField(WebElement element, String value){
         try {
-            driver.findElement(element).clear();
-            driver.findElement(element).sendKeys(value);
+            element.clear();
+            element.sendKeys(value);
             log.info(element + ": clicked " );
         } catch (Exception e) {
             log.error("Can't input '" + value +" ' to an element " + element);
         }
     }
 
-    public void tickCheckBox(By element, Boolean isStatusResult){
+    public void tickCheckBox(WebElement element, Boolean isStatusResult){
 
-        Boolean currentStatusResult = driver.findElement(element).isSelected();
+        Boolean currentStatusResult = element.isSelected();
         if((currentStatusResult && !isStatusResult) ||  (!currentStatusResult && isStatusResult)){
 
-            driver.findElement(element).click();
+            element.click();
         }
 
     }
@@ -83,9 +85,9 @@ public class UIActions {
         }
     }
 
-    public String getTextFromElement(By element){
+    public String getTextFromElement(WebElement element){
         try {
-            return driver.findElement(element).getText();
+            return element.getText();
         } catch (Exception e) {
             log.error("Something went wrong");
             throw new AssertionError("getTextFromElement: Ooops!");

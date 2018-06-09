@@ -4,19 +4,32 @@ import libs.UIActions;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 public class LoginPage extends ParentPage{
 
-
+    // 1) type
 //    String LoginFieldName = "_username";
 //    String PasswordFieldid = "password";
 //    String SubmitButtonType = "submit";
 
-    By LoginFieldName = By.name("_username");
-    By PasswordFieldid = By.id("password");
-    By SubmitButtonXpath = By.xpath(".//button[@type='submit']");
+    //2) type
+//    By LoginFieldName = By.name("_username");
+//    By PasswordFieldid = By.id("password");
+//    By SubmitButtonXpath = By.xpath(".//button[@type='submit']");
+
+    // 3) type. Only with PageFactory.initElements(driver, this)
+    @FindBy(name = "_username")
+    WebElement LoginFieldName;
+
+    @FindBy(id = "password")
+    WebElement PasswordFieldid;
+
+    @FindBy(xpath = ".//button[@type='submit']")
+    WebElement SubmitButtonXpath;
+
 
     public LoginPage(WebDriver driver){
         // Вся начинка идет из конструктора ParentPage
@@ -53,6 +66,7 @@ public class LoginPage extends ParentPage{
         inputToLoginField(login);
         inputToPasswordField(password);
         clickSubmitButton();
+        log.info("Login success");
     }
 
     public void openPage(String url){
