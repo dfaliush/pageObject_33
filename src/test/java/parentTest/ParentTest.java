@@ -24,12 +24,7 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import pages.ApparatPage;
-import pages.EditApparatPage;
-import pages.EditSdelkiPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.SdelkiListPage;
+import pages.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,17 +42,20 @@ import static org.hamcrest.CoreMatchers.is;
 public class ParentTest {
     protected WebDriver driver;
     protected UIActions uiActions;
+//    protected Utils utils;
     public LoginPage loginPage;
     public HomePage homePage;
-    public SdelkiListPage sdelkiListPage;
-    public EditSdelkiPage editSdelkiPage;
+    //public SdelkiListPage sdelkiListPage;
+    //public EditSdelkiPage editSdelkiPage;
+    public InstallPage installPage;
+    public EditInstallPage editInstallPage;
     // public SparePage sparePage;
     // public EditNewSparePage editNewSparePage;
     public ApparatPage apparatPage;
     public EditApparatPage editApparatPage;
     //public TypeSdelkiPage typeSdelkiPage;
     //public EditTypeSdelkiPage editTypeSdelkiPage;
-    private Utils utils = new Utils();
+    protected Utils utils = new Utils();
     public boolean isTestPass = false;
     private String pathToScreenShot;
     private String browser;
@@ -146,8 +144,10 @@ public class ParentTest {
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         uiActions = new UIActions(driver);
-         sdelkiListPage = new SdelkiListPage(driver);
-        editSdelkiPage = new EditSdelkiPage(driver);
+        //sdelkiListPage = new SdelkiListPage(driver);
+        //editSdelkiPage = new EditSdelkiPage(driver);
+        installPage = new InstallPage(driver);
+        editInstallPage = new EditInstallPage(driver);
         //sparePage = new SparePage(driver);
         //editNewSparePage = new EditNewSparePage(driver);
         apparatPage = new ApparatPage(driver);
@@ -181,6 +181,14 @@ public class ParentTest {
           if (!actual.equals(expected)) {
             utils.screenShot(pathToScreenShot, driver);
           }
+        Assert.assertThat(message, actual, is (expected));
+        isTestPass = true;
+    }
+
+    protected void checkAcceptanceCriteria(String message, int actual, int expected){
+        if (actual != expected) {
+            utils.screenShot(pathToScreenShot, driver);
+        }
         Assert.assertThat(message, actual, is (expected));
         isTestPass = true;
     }

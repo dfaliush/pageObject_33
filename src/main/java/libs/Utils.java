@@ -2,9 +2,7 @@ package libs;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,4 +30,24 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public String changeTheValueOfMinutesByOne(String stringValueAsString){
+        try {
+            int minutes = Integer.parseInt(stringValueAsString);
+            if (minutes < 59){
+                minutes ++;
+                return String.valueOf(minutes);
+            }else if (minutes == 59){
+                minutes --;
+                return String.valueOf(minutes);
+            }else {
+                return "Oops! Not correct value. Your value is " + stringValueAsString;
+            }
+        } catch (NumberFormatException e) {
+            log.error("Oops! changeTheValueOfMinutesByOne");
+            return "Oops! Not correct value. Your value is " + stringValueAsString;
+        }
+
+    }
+
 }

@@ -108,4 +108,13 @@ public class HomePage extends ParentPage {
     public boolean isAvatarpresent(){
         return uiActions.isVisibleAbdEnabled(avatar);
     }
+
+    public void sideBarInstallClick(){
+        try {
+            sideBarInstall.click();
+        } catch (Exception e) {
+            log.error("can't click on element sideBarInstall");
+            Assert.fail("can't click on element sideBarInstall"); ;
+        }
+    }
 }

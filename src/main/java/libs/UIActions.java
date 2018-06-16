@@ -154,4 +154,5 @@ public class UIActions {
             throw new AssertionError("getCurrentUrl: Ooops!");
         }
     }
+
 }
