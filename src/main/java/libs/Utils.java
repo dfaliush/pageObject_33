@@ -45,7 +45,7 @@ public class Utils {
             }
         } catch (NumberFormatException e) {
             log.error("Oops! changeTheValueOfMinutesByOne");
-            return "Oops! Not correct value. Your value is " + stringValueAsString;
+            return "Oops! Not correct value.Your value is " + stringValueAsString;
         }
 
     }
