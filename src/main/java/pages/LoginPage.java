@@ -1,11 +1,16 @@
 package pages;
 
+import libs.ConfigData;
 import libs.UIActions;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import sun.security.krb5.Config;
+
+import java.io.IOException;
 
 
 public class LoginPage extends ParentPage{
@@ -74,6 +79,17 @@ public class LoginPage extends ParentPage{
             driver.get(url);
         } catch (Exception e) {
             log.error("Can't open an url: " + url);
+        }
+    }
+
+
+    public void openLoginPage() {
+        try {
+            driver.get(ConfigData.getCfgValue("base_url") +"/login");
+            log.info("Page login was opened");
+        } catch (Exception e) {
+            log.error("Cannot open URL");
+            Assert.fail("Cannot open URL");
         }
     }
 

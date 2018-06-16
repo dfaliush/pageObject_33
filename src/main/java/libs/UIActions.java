@@ -1,17 +1,23 @@
 package libs;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UIActions {
     Logger log;
     WebDriver driver;
     JavascriptExecutor jse;
+    WebDriverWait webDriverWait;
 
     public UIActions(WebDriver driver){
         this.driver = driver;
         log = Logger.getLogger(getClass());
         jse = (JavascriptExecutor)driver;
+        webDriverWait = new WebDriverWait(driver, 20);
     }
 
     /**
@@ -33,7 +39,8 @@ public class UIActions {
      */
     public void clickToElement(WebElement element){
         try {
-
+            // Явное ожидание
+            webDriverWait.until(ExpectedConditions.visibilityOf(element));
             // Refactoring. driver.findElement(element).click();
             element.click();
             log.info(element + ": clicked " );
@@ -70,6 +77,21 @@ public class UIActions {
     public void selectDropDownElemByValue(WebElement webElement, String value){
         webElement.findElement(By.xpath(".//option[contains(text(),'" + value + "')]")).click();
     }
+
+
+    public boolean selectItemInDropDownByVisibleText(WebElement elementDD, String textForSelect){
+        try {
+            Select optionsFromDD = new Select(elementDD);
+            optionsFromDD.selectByVisibleText(textForSelect);
+            log.info(textForSelect + " was selected in DD");
+            return true;
+        } catch (Exception e) {
+            log.error("Can not work with element");
+            Assert.fail("Can not work with element");
+            return false;
+        }
+    }
+
 
     public boolean isVisibleAbdEnabled(WebElement element){
         try {

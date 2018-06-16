@@ -4,11 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class DealsEdit extends ParentPage {
+public class EditSdelkiPage extends ParentPage {
 
     By tableWithDropDowns = By.xpath(".//*[@class='col-sm-10']//select");
 
-    public DealsEdit(WebDriver driver) {
+    public EditSdelkiPage(WebDriver driver) {
         super(driver);
     }
 
