@@ -17,4 +17,8 @@ public class ParentPage {
         PageFactory.initElements(driver, this);
     }
 
+    public String getTitle(){
+        return driver.getTitle();
+    }
+
 }

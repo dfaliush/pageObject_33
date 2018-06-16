@@ -96,9 +96,6 @@ public class HomePage extends ParentPage {
         }
     }
 
-    public String getTitle(){
-        return driver.getTitle();
-    }
 
     public void chechTitle(String title){
         Assert.assertEquals("Title not expected", getTitle(), title);

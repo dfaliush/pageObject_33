@@ -33,18 +33,29 @@ public class OtherTests extends ParentTest{
     @Test
     public void selectDropDownElement() throws InterruptedException {
 
-        loginPage.openPage("http://v3.test.itpmgroup.com/login");
+//        loginPage.openPage("http://v3.test.itpmgroup.com/login");
         loginPage.loginUser("student", "909090");
 
-        // Заменить на вейт
-        Thread.sleep(1000);
         loginPage.openPage("http://v3.test.itpmgroup.com/dictionary/installation/edit/2");
 
-        // Заменить на вейт
-        Thread.sleep(1000);
-//        UIActions uiActions = new UIActions(driver);
-//        uiActions.selectDropDownElemByValue(editSdelkiPage.selectDealDay(), "06");
-        Boolean chosen = uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectDealDay(), "06");
+        Boolean chosen;
+
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectDealDay(), "14");
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectDealMonth(), "марта");
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectDealYear(), "2018");
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectDealHour(), "10");
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectDealMinutes(), "31");
+
+
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectInstallationApparat(), "test1");
+
+        uiActions.selectItemInDropDownByVisibleText(editSdelkiPage.selectInstallationWorkers(), "abc abc");
+        editSdelkiPage.setSaveButton();
+
+
+
+        chosen = true;
+
         Utils utils = new Utils();
         utils.screenShot("log/bla.jpg", driver);
         checkAcceptanceCriteria

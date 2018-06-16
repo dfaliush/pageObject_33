@@ -3,6 +3,7 @@ package parentTest;
 //import Pages.*;
 //import libs.ExcelDriver;
 //import libs.ExcelDriver;
+import libs.ExcelDriver;
 import libs.UIActions;
 import libs.Utils;
 import org.apache.log4j.Logger;
@@ -61,7 +62,7 @@ public class ParentTest {
     private String pathToScreenShot;
     private String browser;
     Logger log;
-//    public ExcelDriver excelDriver;
+    public ExcelDriver excelDriver;
 
     @Rule
     public TestName testName = new TestName();
@@ -154,7 +155,7 @@ public class ParentTest {
         // typeSdelkiPage = new TypeSdelkiPage(driver);
         // editTypeSdelkiPage = new EditTypeSdelkiPage(driver);
 
-//        excelDriver = new ExcelDriver();
+        excelDriver = new ExcelDriver();
 
 
     }

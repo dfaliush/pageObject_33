@@ -33,7 +33,6 @@ public class ValidTest extends ParentTest{
 
     @Test
     public void validLoginTest(){
-        loginPage.openLoginPage();
         loginPage.loginUser("student", "909090");
         checkAcceptanceCriteria
                 ("Avatar is not present", homePage.isAvatarpresent(), true);
