@@ -1,6 +1,7 @@
 package loginTest;
 
 import libs.ConfigData;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -22,7 +23,7 @@ public class ValidTestWithParamFromExel extends ParentTest{
         super(browser);
     }
 
-
+    @Ignore
     @Test
     public void validLogin() throws IOException {
         Map dataFromExelForValidLoginTest = excelDriver

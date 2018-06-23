@@ -1,14 +1,7 @@
 package loginTest;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import pages.LoginPage;
-import pages.ParentPage;
 import parentTest.ParentTest;
-
-import java.io.File;
 
 public class ValidTest extends ParentTest{
     public ValidTest(String browser) {
@@ -31,6 +24,7 @@ public class ValidTest extends ParentTest{
 //        loginPage = new LoginPage(driver);
 //    }
 
+    @Ignore
     @Test
     public void validLoginTest(){
         loginPage.loginUser("student", "909090");

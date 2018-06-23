@@ -17,7 +17,7 @@ public class UIActions {
         this.driver = driver;
         log = Logger.getLogger(getClass());
         jse = (JavascriptExecutor)driver;
-        webDriverWait = new WebDriverWait(driver, 20);
+        webDriverWait = new WebDriverWait(driver, 10);
     }
 
     /**
@@ -39,13 +39,17 @@ public class UIActions {
      */
     public void clickToElement(WebElement element){
         try {
-            // Явное ожидание
+            // Явное ожидание.
             webDriverWait.until(ExpectedConditions.visibilityOf(element));
+
             // Refactoring. driver.findElement(element).click();
             element.click();
-            log.info(element + ": clicked " );
+
+            //Если заменить на element + "clicked" - Отрабатывает после окончания имплисити вейта.
+//            log.info( "Clicked " );
         } catch (Exception ex) {
             log.error("Can't click to an element " + element);
+            Assert.fail("Can't click to an element");
         }
     }
 

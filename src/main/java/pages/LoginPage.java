@@ -1,19 +1,13 @@
 package pages;
 
 import libs.ConfigData;
-import libs.UIActions;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import sun.security.krb5.Config;
-
-import java.io.IOException;
 
 
-public class LoginPage extends ParentPage{
+public class LoginPage extends ParentPage {
 
     // 1) type
 //    String LoginFieldName = "_username";
@@ -33,6 +27,7 @@ public class LoginPage extends ParentPage{
     WebElement PasswordFieldid;
 
     @FindBy(xpath = ".//button[@type='submit']")
+//    @FindBy(xpath = ".//button[contains(text(), 'Вход')]")
     WebElement SubmitButtonXpath;
 
 

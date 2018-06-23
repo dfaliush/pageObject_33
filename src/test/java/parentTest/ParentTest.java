@@ -7,20 +7,15 @@ import libs.ExcelDriver;
 import libs.UIActions;
 import libs.Utils;
 import org.apache.log4j.Logger;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.*;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -40,21 +35,29 @@ import static org.hamcrest.CoreMatchers.is;
 @RunWith(value = Parameterized.class)
 
 public class ParentTest {
+    public static Boolean setUpIsDone;
     protected WebDriver driver;
     protected UIActions uiActions;
-//    protected Utils utils;
+
     public LoginPage loginPage;
     public HomePage homePage;
-    //public SdelkiListPage sdelkiListPage;
-    //public EditSdelkiPage editSdelkiPage;
+
+    public DictionaryApparat apparatPage;
+    public DictionartEditApparatPage editApparatPage;
+    public DictionaryWorkersPage workersPage;
+    public DictionarySpareTypes spareTypes;
+    public DictionarySpare spare;
+    public DictionaryDealsProviders dealsProviders;
+    public DictionaryEditDealsProviders editDealsProviders;
+    public DictionaryDealTypes dealTypes;
+
+    public ServicePage servicePage;
     public InstallPage installPage;
     public EditInstallPage editInstallPage;
-    // public SparePage sparePage;
-    // public EditNewSparePage editNewSparePage;
-    public ApparatPage apparatPage;
-    public EditApparatPage editApparatPage;
-    //public TypeSdelkiPage typeSdelkiPage;
-    //public EditTypeSdelkiPage editTypeSdelkiPage;
+    public DealsPage dealsPage;
+    public EditDealsPage editDealsPage;
+    public ReportPage reportPage;
+
     protected Utils utils = new Utils();
     public boolean isTestPass = false;
     private String pathToScreenShot;
@@ -68,7 +71,6 @@ public class ParentTest {
     public ParentTest(String browser) {
         this.browser = browser;
         log = Logger.getLogger(getClass());
-//        this.uiActions = uiActions;
     }
 
 
@@ -90,6 +92,11 @@ public class ParentTest {
     }
 
 
+    @BeforeClass
+    public static void someSetup(){
+        setUpIsDone = false;
+    }
+
 
     @Before
     public void setUp() {
@@ -101,8 +108,6 @@ public class ParentTest {
 
         if ("chrome".equals(browser)) {
             log.info("Chrome will be started");
-//            File fileFF = new File("drivers/chromedriver");
-//            System.setProperty("webdriver.chrome.driver", fileFF.getAbsolutePath());
             System.setProperty("webdriver.chrome.driver", "drivers/chromedriver1");
             driver = new ChromeDriver();
             log.info("Chrome is started");
@@ -139,25 +144,30 @@ public class ParentTest {
         }
 
         // явные ожидание
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         uiActions = new UIActions(driver);
-        //sdelkiListPage = new SdelkiListPage(driver);
-        //editSdelkiPage = new EditSdelkiPage(driver);
+
+        apparatPage = new DictionaryApparat(driver);
+        editApparatPage = new DictionartEditApparatPage(driver);
+        workersPage = new DictionaryWorkersPage(driver);
+        spareTypes = new DictionarySpareTypes(driver);
+        spare = new DictionarySpare(driver);
+        dealsProviders = new DictionaryDealsProviders(driver);
+        editDealsProviders = new DictionaryEditDealsProviders(driver);
+        dealTypes = new DictionaryDealTypes(driver);
+
+        servicePage = new ServicePage(driver);
         installPage = new InstallPage(driver);
         editInstallPage = new EditInstallPage(driver);
-        //sparePage = new SparePage(driver);
-        //editNewSparePage = new EditNewSparePage(driver);
-        apparatPage = new ApparatPage(driver);
-        editApparatPage = new EditApparatPage(driver);
-        // typeSdelkiPage = new TypeSdelkiPage(driver);
-        // editTypeSdelkiPage = new EditTypeSdelkiPage(driver);
+        dealsPage = new DealsPage(driver);
+        editDealsPage = new EditDealsPage(driver);
+        reportPage = new ReportPage(driver);
 
         excelDriver = new ExcelDriver();
-
-
+        setUpIsDone = false;
     }
 
     @After

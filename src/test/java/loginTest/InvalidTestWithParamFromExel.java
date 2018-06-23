@@ -3,6 +3,7 @@ package loginTest;
 
 import libs.ConfigData;
 import libs.SpreadsheetData;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -34,7 +35,7 @@ public class InvalidTestWithParamFromExel extends ParentTest{
         return new SpreadsheetData(spreadsheet, "InvalidLogOn").getData();
     }
 
-
+    @Ignore
     @Test
     public void invalidLogin() {
         loginPage.loginUser(login, pass);

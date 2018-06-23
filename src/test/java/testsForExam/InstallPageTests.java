@@ -1,7 +1,6 @@
 package testsForExam;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -13,18 +12,18 @@ import java.util.Collection;
 @RunWith(value = Parameterized.class)
 
 
-public class OtherTests extends ParentTest{
-    String day;
-    String month;
-    String year;
-    String hour;
-    String minutes;
-    String nameOfAnApparat;
-    String worker;
+public class InstallPageTests extends ParentTest{
+    private String day;
+    private String month;
+    private String year;
+    private String hour;
+    private String minutes;
+    private String nameOfAnApparat;
+    private String worker;
 
-    public OtherTests(String browser, String day, String month,
-                      String year, String hour, String minutes,
-                      String nameOfAnApparat, String worker) {
+    public InstallPageTests(String browser, String day, String month,
+                            String year, String hour, String minutes,
+                            String nameOfAnApparat, String worker) {
         super(browser);
         this.day = day;
         this.month = month;
@@ -33,13 +32,12 @@ public class OtherTests extends ParentTest{
         this.minutes = minutes;
         this.nameOfAnApparat = nameOfAnApparat;
         this.worker = worker;
-
     }
 
     @Before
     public void before(){
         loginPage.loginUser("student", "909090");
-        homePage.sideBarInstallClick();
+        homePage.pressSideBarInstall();
     }
 
     @Parameterized.Parameters
@@ -146,6 +144,7 @@ public class OtherTests extends ParentTest{
                                 (numberOfARowsAfter, 3), worker);
     }
 
+    //@Ignore
     @Test
     public void removeTheLastRowInATable(){
         int numberOfARowsBeforeRemoving = installPage.numberOfRowsInATable();
@@ -155,7 +154,7 @@ public class OtherTests extends ParentTest{
         int numberOfARowsAfterRemoving = installPage.numberOfRowsInATable();
 
         checkAcceptanceCriteria
-                ("The value of a rows is not increased",
+                ("The value of a rows is not decreased",
                         numberOfARowsBeforeRemoving -1, numberOfARowsAfterRemoving);
     }
 

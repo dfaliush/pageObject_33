@@ -1,7 +1,6 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,7 +14,7 @@ public class HomePage extends ParentPage {
 //    By sideBarDictionaryWorkers = By.xpath(".//*[@id='workers']/a");
 //    By sideBarDictionarySpareType= By.xpath(".//*[@id='spareType']/a");
 //    By sideBarDictionarySpares= By.xpath(".//*[@id='spares']/a");
-//    By sideBarDictionaryCustomers= By.xpath(".//*[@id='prov_cus']/a");
+//    By sideBarDictionaryProviders= By.xpath(".//*[@id='prov_cus']/a");
 //    By sideBarDictionaryDealsType= By.xpath(".//*[@id='deal_type']/a");
 //    By sideBarServiceApparat= By.xpath(".//*[@id='service_apparat']//" +
 //            "span[text()='Обслуживание']");
@@ -27,9 +26,6 @@ public class HomePage extends ParentPage {
 //    By tableBase= By.xpath(".//div[@class='col-md-12']");
 //    By addRow= By.xpath(".//a[@data-original-title='Add']");
 //    By tableBody= By.xpath(".//table[@id='device_list']/tbody");
-
-    @FindBy(tagName = "h1")
-    protected WebElement zagolovok;
 
     @FindBy(xpath = ".//*[@id='dashboard']//span")
     WebElement sideBarMenuGlavnaya;
@@ -49,10 +45,17 @@ public class HomePage extends ParentPage {
     WebElement sideBarDictionaryWorkers;
 
     @FindBy(xpath = ".//*[@id='spareType']/a")
+    WebElement sideBarDictionarySparesTypes;
+
+    @FindBy(xpath = ".//*[@id='spares']/a")
     WebElement sideBarDictionarySpares;
 
-    @FindBy(xpath = ".//*[@id='prov_cus']/a")
-    WebElement sideBarDictionaryCustomers;
+//    @FindBy(xpath = ".//*[@id='prov_cus']/a")
+    @FindBy(xpath = ".//a[@href='/dictionary/providers']")
+    WebElement sideBarDictionaryProviders;
+
+    @FindBy(xpath = ".//h3[contains(text(), 'Список контрагентов')]")
+    WebElement customersPageSubtitle;
 
     @FindBy(xpath = ".//*[@id='deal_type']/a")
     WebElement sideBarDictionaryDealsType;
@@ -65,56 +68,129 @@ public class HomePage extends ParentPage {
     WebElement sideBarInstall;
 
     @FindBy(xpath = ".//*[@id='deal']//span[text()='Сделки']")
+    WebElement sideBarDeals;
+
+    @FindBy(xpath = ".//*[@id='report']//span[text()='Отчет']")
     WebElement sideBarReport;
 
     @FindBy(xpath = ".//*[@href='/']")
     WebElement homeButton;
 
-    @FindBy(xpath = ".//div[@class='col-md-12']")
-    WebElement tableBase;
-
-
-    @FindBy(xpath = ".//a[@data-original-title='Add']")
-    WebElement addRow;
-
-    @FindBy(xpath = ".//table[@id='device_list']/tbody")
-    WebElement tableBody;
-
-
     public HomePage(WebDriver driver) {
         super(driver);
-    }
-
-
-    public WebElement findSideBarGlavnaya(){
-
-        try {
-            return sideBarMenuGlavnaya;
-        } catch (Exception e) {
-            log.error("can't find an element");
-            return null;
-        }
-    }
-
-
-    public void chechTitle(String title){
-        Assert.assertEquals("Title not expected", getTitle(), title);
-    }
-
-    public void chechZagolovok(String zagolovokText){
-        Assert.assertEquals("Zagolovok not expected",zagolovok.getText(), zagolovokText);
     }
 
     public boolean isAvatarpresent(){
         return uiActions.isVisibleAbdEnabled(avatar);
     }
 
-    public void sideBarInstallClick(){
+
+    public void pressSideBarDictionary(){
         try {
-            sideBarInstall.click();
+            uiActions.clickToElement(sideBarDictionary);
+            log.info("sideBarDictionary  - clicked");
         } catch (Exception e) {
-            log.error("can't click on element sideBarInstall");
+            Assert.fail("can't click on element sideBarDictionary"); ;
+        }
+    }
+
+    public void pressSideBarDictionaryApparat(){
+        try {
+            uiActions.clickToElement(sideBarDictionaryApparat);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDictionaryApparat"); ;
+        }
+    }
+
+    public void pressSideBarDictionaryWorkers(){
+        try {
+            uiActions.clickToElement(sideBarDictionaryWorkers);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDictionaryWorkers"); ;
+        }
+    }
+
+    public void pressSideBarDictionaryZap4astiTypes(){
+        try {
+            uiActions.clickToElement(sideBarDictionarySparesTypes);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDictionarySparesTypes"); ;
+        }
+    }
+
+    public void pressSideBarDictionaryZap4asti(){
+        try {
+            uiActions.clickToElement(sideBarDictionarySpares);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDictionarySpares"); ;
+        }
+    }
+
+    public void pressSideBarDictionaryProviders(){
+        try {
+            uiActions.clickToElement(sideBarDictionaryProviders);
+            Assert.assertEquals("Not a Customers page", customersPageSubtitle.getText(), "Список контрагентов");
+            log.info("pressSideBarDictionaryProviders  - successfully");
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDictionaryProviders"); ;
+        }
+    }
+
+    public void pressSideBarDictionaryDealsType(){
+        try {
+            uiActions.clickToElement(sideBarDictionaryDealsType);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDictionaryDealsType"); ;
+        }
+    }
+
+    public void pressSideBarServiceApparat(){
+        try {
+            uiActions.clickToElement(sideBarServiceApparat);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarServiceApparat"); ;
+        }
+    }
+
+    public void pressSideBarInstall(){
+        try {
+            uiActions.clickToElement(sideBarInstall);
+        } catch (Exception e) {
             Assert.fail("can't click on element sideBarInstall"); ;
         }
     }
+
+    public void pressSideBarDeals(){
+        try {
+            uiActions.clickToElement(sideBarDeals);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarDeals"); ;
+        }
+    }
+
+    public void pressSideBarReport(){
+        try {
+            uiActions.clickToElement(sideBarReport);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarReport"); ;
+        }
+    }
+
+    public void pressHomeButton(){
+        try {
+            uiActions.clickToElement(homeButton);
+        } catch (Exception e) {
+            Assert.fail("can't click on element homeButton"); ;
+        }
+    }
+
+    public void pressMainButton(){
+        try {
+            uiActions.clickToElement(sideBarMenuGlavnaya);
+        } catch (Exception e) {
+            Assert.fail("can't click on element sideBarMenuGlavnaya"); ;
+        }
+    }
+
+
 }
